@@ -8,9 +8,9 @@ const db = new Sequelize(
   process.env.USERDB || "root",
   process.env.PASSWORD || "",
   {
-    host: process.env.HOSTDB,
+    host: "127.0.0.1" || process.env.HOSTDB,
     dialect: "mysql",
-    port: Number(process.env.PORTDB) || 8102,
+    port: Number(process.env.PORTDB) || 3306,
     /*
     // quitar los mensajes de la bd que se muestran en la consola
     logging: false,

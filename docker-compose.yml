@@ -2,9 +2,34 @@ services:
   rest-node:
     build:
       context: .
+    depends_on:
+      - mariadb_service
+      - phpMyAdmin
     container_name: express-api
     ports:
       - ${PORT}:8000
     volumes:
       - ./uploads:/app/uploads
     restart: always
+
+  mariadb_service:
+    container_name: mariadb_database
+    image: mariadb:jammy
+    ports:
+      - ${PORTDB}:3306
+    volumes:
+      - ./mariaDB:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=${PASSWORD}
+      - MARIADB_DATABASE=${NAMEDB}
+
+  phpMyAdmin:
+    depends_on:
+      - mariadb_service
+    image: phpmyadmin:5.2.0-apache
+    ports:
+      - "8080:80"
+    volumes:
+      - ./phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+    environment:
+      - PMA_ARBITRARY=1
