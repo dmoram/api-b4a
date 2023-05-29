@@ -1,0 +1,13 @@
+node_modules/
+mariaDB/
+dist/
+phpmyadmin/
+
+Dockerfile
+docker-compose.yml
+readme.md
+
+.template.env
+.git
+.gitignore
+.dockerignore

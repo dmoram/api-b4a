@@ -1,0 +1,10 @@
+services:
+  rest-node:
+    build:
+      context: .
+    container_name: express-api
+    ports:
+      - ${PORT}:8000
+    volumes:
+      - ./uploads:/app/uploads
+    restart: always
